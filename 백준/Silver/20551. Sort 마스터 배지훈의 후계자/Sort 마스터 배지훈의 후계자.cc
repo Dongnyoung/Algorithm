@@ -14,8 +14,8 @@ int main() {
 	sort(v.begin(), v.end());
 	while (m--) {
 		int t; cin >> t;
-		auto it = lower_bound(v.begin(), v.end(), t);
-		if (it == v.end() || *it != t) cout << -1 << '\n';
-		else cout << it - v.begin() << '\n';
+		auto w = lower_bound(v.begin(), v.end(), t);
+		if (w == v.end() || *w != t) cout << -1 << '\n';
+		else cout << w - v.begin() << '\n';
 	}
 }
