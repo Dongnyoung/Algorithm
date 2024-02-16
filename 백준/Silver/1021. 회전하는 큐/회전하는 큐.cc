@@ -30,8 +30,8 @@ int main() {
                 idx = i;
                 break;
             }
-            dq.push_back(dq.front());
-            dq.pop_front();
+            dq.push_front(dq.back());
+            dq.pop_back();
         }
 
         // 회전 횟수 계산
