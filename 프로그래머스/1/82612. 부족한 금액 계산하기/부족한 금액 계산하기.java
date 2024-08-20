@@ -10,8 +10,7 @@ class Solution {
             answer+=price*i; // 총이용료
         }
         answer -= money;
-        if(answer < 0) // 부족하지않으면
-            answer = 0;
-        return answer;
+        
+        return answer<0? 0:answer;
     }
 }
