@@ -7,8 +7,25 @@ class Solution {
     };
 
     public boolean isAlpha(String a, String b) {
+        int count=0;
         if (a == null || b == null) return false;
-        return Arrays.asList(alpha).contains(a.toLowerCase()) && Arrays.asList(alpha).contains(b.toLowerCase());
+        
+        for(int i=0;i<alpha.length;i++){
+            if(a.toLowerCase().equals(alpha[i])){
+                count++;
+            }
+        }
+        for(int i=0;i<alpha.length;i++){
+            if(b.toLowerCase().equals(alpha[i])){
+                count++;
+            }
+        }
+        if(count==2){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     public int solution(String str1, String str2) {
@@ -45,7 +62,7 @@ class Solution {
             for (int j = 0; j < s2.length; j++) {
                 if (s2[j] == null) continue;
 
-                if (s1[i].equalsIgnoreCase(s2[j])) {
+                if (s1[i].equals(s2[j])) {
                     gyo.add(s1[i]);
                     s2[j] = null; // 교집합에 썼으면 제거
                     break;
