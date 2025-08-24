@@ -29,6 +29,9 @@ class Solution {
         dist[1]=0;
         while(!pq.isEmpty()){
             Node now = pq.poll();
+            if(dist[now.vertex]<now.cost){
+                continue;
+            }
             for(Node next: nodeList[now.vertex]){
                 if(dist[next.vertex]>next.cost+now.cost){
                     dist[next.vertex]=next.cost+now.cost;
