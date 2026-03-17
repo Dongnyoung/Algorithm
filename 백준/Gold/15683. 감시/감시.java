@@ -80,9 +80,8 @@ public class Main {
 
         //감시
         while(nx>=0 && ny>=0 && nx<copy.length && ny<copy[0].length && copy[nx][ny]!=6){
-            if(copy[nx][ny]==0){
-                copy[nx][ny] =-1;
-            }
+              copy[nx][ny] =-1;
+            
 
             nx +=dx[d];
             ny +=dy[d];
