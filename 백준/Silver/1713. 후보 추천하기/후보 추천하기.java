@@ -29,7 +29,7 @@ public class Main {
 
         for(int i=0;i<M;i++){
             int recNum = recs[i];
-            //이미존재하는학생이라면
+            //비어있다면
             if(students.containsKey(recNum)){
                 students.get(recNum).number++;
             }
@@ -39,7 +39,7 @@ public class Main {
                     delete(students);
 
                 }
-                students.put(recNum,new Student(i,1));
+                students.put(recNum,new Student(i,students.getOrDefault(recNum, new Student(i,1)).number+1));
             }
 
 
@@ -80,7 +80,9 @@ public class Main {
             }
         }
         if(list.size()>=2){
-            Collections.sort(list,(o1,o2)-> Integer.compare(o1[1],o2[1]));
+            Collections.sort(list,(o1,o2)->{
+               return Integer.compare(o1[1],o2[1]);
+            });
             students.remove(list.get(0)[0]);
             return;
         }
