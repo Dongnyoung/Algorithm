@@ -1,3 +1,6 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.*;
 
 public class Main {
@@ -18,18 +21,22 @@ public class Main {
     static List<Node> empties;
     static int max=0;
     static List<Node> viruses;
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+    public static void main(String[] args)throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+        st = new StringTokenizer(br.readLine());
 
-        N = sc.nextInt();
-        M = sc.nextInt();
+
+        N = Integer.parseInt(st.nextToken());
+        M = Integer.parseInt(st.nextToken());
         graph = new int[N][M];
 
         empties = new ArrayList<>();
         viruses = new ArrayList<>();
         for(int i=0;i<N;i++){
+            st = new StringTokenizer(br.readLine());
             for(int j=0;j<M;j++){
-                graph[i][j] = sc.nextInt();
+                graph[i][j] = Integer.parseInt(st.nextToken());
                 if(graph[i][j] ==0){
                     empties.add(new Node(i,j));
                 }
