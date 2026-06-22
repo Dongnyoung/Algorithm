@@ -1,44 +1,42 @@
 import java.util.*;
 class Solution {
     public String[] solution(String[] record) {
-        List<String> answer = new ArrayList<>();
         
+        //mecro
         Map<String,String> map = new HashMap<>();
-        //쪼개기
-        for(String r : record){
-            //명령어, 아이디, 닉네임
-            String[] re = r.split(" ");
-            String cmd = re[0];
-            String id = re[1];
-            
-            
-            if(cmd.equals("Enter")){
-                String nickName = re[2];
-                answer.add(id+","+cmd); // id,cmd 저장
-                map.put(id,nickName); //id - 닉네임 넣기
-            }
-            else if(cmd.equals("Leave")){
-                answer.add(id+","+cmd);
-            }
-            else{
-                String nickName = re[2];
-                map.put(id,nickName);
-            }
-        }
+        map.put("Enter","님이 들어왔습니다.");
+        map.put("Leave","님이 나갔습니다.");
         
-        String[] ans = new String[answer.size()];
-        for(int i=0;i<ans.length;i++){
-            String line = answer.get(i);
-            String[] lines = line.split(",");
-            String id = lines[0];
-            String command = lines[1];
+        Map<String,String> idMap = new HashMap<>();
+        List<String> result = new ArrayList<>();
+        for(String re : record){
+            String[] cmd = re.split(" ");
+            String command = cmd[0];
+            String id = cmd[1];
+            
             if(command.equals("Enter")){
-                ans[i] = map.get(id)+"님이 들어왔습니다.";
+                String name = cmd[2];
+                idMap.put(id,name);
+                result.add("Enter"+","+id);
+            }
+            else if(command.equals("Leave")){
+                result.add("Leave"+","+id);
             }
             else{
-                ans[i] = map.get(id)+"님이 나갔습니다.";
+                String name =cmd[2];
+                idMap.put(id,name);
             }
         }
-        return ans;
+        String[] answer = new String[result.size()];
+        
+        for(int i=0;i<result.size();i++){
+            String cmdAndId = result.get(i);
+            String[] line = cmdAndId.split(",");
+            String cmd = line[0];
+            String id = line[1];
+            
+            answer[i] = idMap.get(id)+map.get(cmd);
+        }
+        return answer;
     }
 }
