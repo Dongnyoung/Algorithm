@@ -12,10 +12,8 @@ class Solution {
     }
     //dfs는 최대던전수체킹
     private static void dfs(int hp, int count){
-        answer= Math.max(count,answer);
-        if(count ==N){
-            return;
-        }
+       
+        
         for(int i=0;i<N;i++){
             
             if(!visited[i] && hp>=map[i][0]){
@@ -27,5 +25,6 @@ class Solution {
             
             
         }
+         answer= Math.max(count,answer);
     }
 }
