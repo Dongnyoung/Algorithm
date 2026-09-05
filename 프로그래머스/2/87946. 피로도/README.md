@@ -1,10 +1,10 @@
 # [level 2] 피로도 - 87946 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/87946?gad_source=1&gad_campaignid=22356298761&gbraid=0AAAAAC_c4nCapmkkfYfcG-KzmBInuBHTU&gclid=Cj0KCQjw79nUBhCgARIsADSHka1VCi9K8GOkBwWa9NPDTqpG4sax8bdVNYuKk9cOePK2SvmBFUawmZgaAh9DEALw_wcB) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/87946?language=java) 
 
 ### 성능 요약
 
-메모리: 89.4 MB, 시간: 3.06 ms
+메모리: 73.2 MB, 시간: 1.61 ms
 
 ### 구분
 
@@ -16,7 +16,7 @@
 
 ### 제출 일자
 
-2026년 09월 02일 00:18:57
+2026년 09월 05일 22:15:47
 
 ### 문제 설명
 

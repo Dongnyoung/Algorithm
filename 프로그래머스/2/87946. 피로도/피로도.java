@@ -1,34 +1,30 @@
-import java.util.*;
 class Solution {
-    static int[][] graph;
-    static int answer;
-    static int N;
+    static int answer,N;
+    static int[][] map;
     static boolean[] visited;
     public int solution(int k, int[][] dungeons) {
-        answer=0;
-        graph=dungeons;
-        N=dungeons.length;
+        answer = 0;
+        N = dungeons.length;
+        map =dungeons;
         visited = new boolean[N];
-        dfs(0,k);
+        dfs(k,0);
         return answer;
     }
-    private static void dfs(int depth,int piro){
-        answer = Math.max(answer,depth);
-        if(depth == N){
+    //dfs는 최대던전수체킹
+    private static void dfs(int hp, int count){
+        answer= Math.max(count,answer);
+        if(count ==N){
             return;
         }
-        
         for(int i=0;i<N;i++){
-            int lastPiro = graph[i][0];
-            int cost = graph[i][1];
-            if(!visited[i]){
-                if(piro>=lastPiro){
-                    visited[i] = true;
-                    //System.out.println(lastPiro);
-                    dfs(depth+1,piro-cost);
-                    visited[i] = false;
-                }
+            
+            if(!visited[i] && hp>=map[i][0]){
+                //System.out.println(map[i][0]);
+                visited[i] = true;
+                dfs(hp-map[i][1],count+1);
+                visited[i] =false;
             }
+            
             
         }
     }
