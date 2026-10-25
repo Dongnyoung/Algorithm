@@ -1,25 +1,20 @@
+
 import java.util.*;
 class Solution {
     public boolean solution(String[] phone_book) {
         boolean answer = true;
-        
-        
-        //set에 넣기
         Set<String> set = new HashSet<>();
-        for(String p : phone_book){
-            set.add(p);
+        for(String phone: phone_book){
+            set.add(phone);
         }
         
-        for(String p: phone_book){
-            int len = p.length();
-            for(int i=1;i<len;i++){
-                String prefix = p.substring(0,i);
-                //System.out.println(prefix);
-                if(set.contains(prefix)){
+        for(String phone: phone_book){
+            for(int i=1;i<phone.length();i++){
+                if(set.contains(phone.substring(0,i))){
+                   // System.out.println(phone.substring(0,i));
                     return false;
                 }
             }
-            
         }
         return answer;
     }
