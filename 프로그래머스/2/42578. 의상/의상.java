@@ -1,17 +1,15 @@
 import java.util.*;
 class Solution {
     public int solution(String[][] clothes) {
-        int answer = 0;
+        int answer = 1;
         Map<String,Integer> map = new HashMap<>();
-        for(String[] c:clothes){
-            map.put(c[1],map.getOrDefault(c[1],0)+1);
+        for(String[] clothe: clothes){
+            String type = clothe[1];
+            map.put(type,map.getOrDefault(type,0)+1);
         }
-        
-        int temp=1;
-        for(Map.Entry<String,Integer> entry: map.entrySet()){
-            temp*=(entry.getValue()+1);
+        for(Map.Entry<String,Integer> entry : map.entrySet()){
+            answer*=(1+entry.getValue());
         }
-        answer = temp-1;
-        return answer;
+        return answer-1;
     }
 }
