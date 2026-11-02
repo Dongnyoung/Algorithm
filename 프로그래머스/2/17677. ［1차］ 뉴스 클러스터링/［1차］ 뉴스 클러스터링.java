@@ -1,85 +1,79 @@
 import java.util.*;
-
 class Solution {
-    String[] alpha = {
-        "a","b","c","d","e","f","g","h","i","j","k","l","m",
-        "n","o","p","q","r","s","t","u","v","w","x","y","z"
-    };
-
-    public boolean isAlpha(String a, String b) {
-        int count=0;
-        if (a == null || b == null) return false;
-        
-        for(int i=0;i<alpha.length;i++){
-            if(a.toLowerCase().equals(alpha[i])){
-                count++;
-            }
-        }
-        for(int i=0;i<alpha.length;i++){
-            if(b.toLowerCase().equals(alpha[i])){
-                count++;
-            }
-        }
-        if(count==2){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
-
     public int solution(String str1, String str2) {
-        // 자카드 유사도 계산: 교집합 / 합집합 * 65536
-        String[] str1List = str1.split("");
-        String[] str2List = str2.split("");
-
-        String[] s1 = new String[str1.length() - 1];
-        String[] s2 = new String[str2.length() - 1];
-
-        for (int i = 0; i < str1List.length - 1; i++) {
-            if (isAlpha(str1List[i], str1List[i + 1])) {
-                s1[i] = (str1List[i] + str1List[i + 1]).toLowerCase();
+        String[] alpha = {
+          "a","b","c","d","e","f","g","h","i","j","k","l","m",
+        "n","o","p","q","r","s","t","u","v","w","x","y","z"
+        };
+        int answer = 0;
+        //대소문자 구분 x
+        String s1= str1.toLowerCase();
+        String s2 = str2.toLowerCase();
+        
+        List<String> list1 = new ArrayList<>();
+        List<String> list2 = new ArrayList<>();
+        
+        for(int i=0;i<s1.length();i++){
+            if(i==s1.length()-1){
+                break;
+            }
+            String temp = s1.substring(i,i+2);
+            if(isAlpha(temp,alpha)){
+                list1.add(temp);
+            }
+            
+        }
+        for(int i=0;i<s2.length();i++){
+            if(i==s2.length()-1){
+                break;
+            }
+            String temp = s2.substring(i,i+2);
+            if(isAlpha(temp,alpha)){
+                list2.add(temp);
             }
         }
-
-        for (int i = 0; i < str2List.length - 1; i++) {
-            if (isAlpha(str2List[i], str2List[i + 1])) {
-                s2[i] = (str2List[i] + str2List[i + 1]).toLowerCase();
+        
+        //합집합은 없는거 넣기 
+        List<String> hab = new ArrayList<>(list1);
+        List<String> tp = new ArrayList<>(list1);
+        
+        for(String s : list2){
+            if(!tp.remove(s)){
+                hab.add(s);
             }
         }
-
-        // 교집합 & 합집합 리스트
-        ArrayList<String> gyo = new ArrayList<>();
-        ArrayList<String> hab = new ArrayList<>();
-
-        // 합집합 먼저 s1에서 넣기
-        for (int i = 0; i < s1.length; i++) {
-            if (s1[i] != null) hab.add(s1[i]);
+        
+        List<String> gyo = new ArrayList<>();
+        List<String> tp2 = new ArrayList<>(list2);
+        
+        for(String s: list1){
+            if(tp2.remove(s)){
+                gyo.add(s);
+            }
         }
-
-        for (int i = 0; i < s1.length; i++) {
-            if (s1[i] == null) continue;
-            for (int j = 0; j < s2.length; j++) {
-                if (s2[j] == null) continue;
-
-                if (s1[i].equals(s2[j])) {
-                    gyo.add(s1[i]);
-                    s2[j] = null; // 교집합에 썼으면 제거
+        if(hab.size()==0){
+            return 65536;
+        }
+        double jacard = (double) gyo.size()/hab.size();
+        jacard*=65536;
+        
+        //System.out.println(s1+" "+s2);
+        return (int)jacard;
+    }
+    static boolean isAlpha(String temp, String[] alpha){
+        for(int i=0;i<temp.length();i++){
+            String t = temp.substring(i,i+1);
+            boolean flag = false;
+            for(int j=0;j<alpha.length;j++){
+                if(t.equals(alpha[j])){
+                    flag=true;
                     break;
                 }
             }
+            if(!flag){
+                return false;
+            }
         }
-
-        // 남은 s2 값 합집합에 추가
-        for (int i = 0; i < s2.length; i++) {
-            if (s2[i] != null) hab.add(s2[i]);
-        }
-
-        // 자카드 예외 처리 (공집합인 경우)
-        if (hab.size() == 0) return 65536;
-
-        // 유사도 계산
-        double jacard = ((double) gyo.size() / hab.size()) * 65536;
-        return (int) jacard;
+        return true;
     }
 }
