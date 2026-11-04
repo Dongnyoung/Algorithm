@@ -24,7 +24,7 @@ class Solution {
             String f = files[i];
             char[] fc = f.toCharArray();
             int idx = 0;
-            int nIdx = fc.length;
+            int nIdx = fc.length; //이거조심..!!!!
             //숫자체크
             for(int j=0;j<fc.length;j++){
                 if(Character.isDigit(fc[j])){
