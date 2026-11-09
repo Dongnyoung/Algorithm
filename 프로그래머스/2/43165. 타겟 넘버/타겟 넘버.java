@@ -1,24 +1,29 @@
-import java.util.*;
 class Solution {
+    static int answer;
+    static int T;
+    static int n;
+    static boolean visited[];
+    static int[] nums;
     public int solution(int[] numbers, int target) {
-        ArrayDeque<Integer> q = new ArrayDeque<>();
-        int answer = 0;
-        q.add(0);
-        for(int num:numbers){
-            int plus = num;
-            int minus = -num;
-            int size= q.size();
-            for(int i=0;i<size;i++){
-                int sum=q.poll();
-                q.add(sum+plus);
-                q.add(sum-plus);
-            }
-        }
-        while(!q.isEmpty()){
-            if(target==q.poll()){
-                answer++;
-            }
-        }
+        answer = 0;
+        T = target;
+        n = numbers.length;
+        nums = numbers;
+        dfs(0,0,0);
         return answer;
     }
+    static private void dfs(int start, int depth,int sum){
+        if(depth == n){
+            if(sum==T){
+                answer++;
+                
+            }
+            return;
+        }
+        
+        
+            
+            dfs(start+1,depth+1,sum+nums[start]);
+            dfs(start+1,depth+1,sum-nums[start]);
+        }
 }
