@@ -27,7 +27,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////
 import java.util.Scanner;
 import java.io.FileInputStream;
-
+import java.util.*;
 /*
    사용하는 클래스명이 Solution 이어야 하므로, 가급적 Solution.java 를 사용할 것을 권장합니다.
    이러한 상황에서도 동일하게 java Solution 명령으로 프로그램을 수행해볼 수 있습니다.
@@ -59,45 +59,30 @@ class Solution
 		{
 		
 			int tNum = sc.nextInt();
-            int[] graph = new int[8];
+           ArrayDeque<Integer> q = new ArrayDeque<>();
             for(int i=0;i<8;i++){
-                graph[i] = sc.nextInt();
+                q.addLast(sc.nextInt());
+                
             }
-            int[] tempGraph = new int[8];
             int minus=1;
             while(true){
-                int firstNum = graph[0];
-                int lastNum = graph[7];
-                
-                if(lastNum<=0){
+                int firstNum = q.pollFirst();
+                int num = firstNum-minus;
+                if(num<=0){
+                    q.addLast(0);
                     break;
                 }
-                
-                
-                for(int i=0;i<7;i++){
-                    tempGraph[i] = graph[i+1];
-                    
-                    
-                }
-                
-                //마지막값처리
-                if((firstNum-minus)<=0){
-                    tempGraph[7]=0;
-                    break;
-                }
-                tempGraph[7] = firstNum-minus;
+                q.addLast(num);
                 minus++;
-                graph = tempGraph;
-               if(minus>5){
-                   minus=1;
-               }
-                
+                if(minus>5){
+                    minus=1;
+                }
             }
             System.out.print("#"+tNum+" ");
-            for(int i=0;i<8;i++){
-                System.out.print(tempGraph[i]+" ");
+            while(!q.isEmpty()){
+                System.out.print(q.pollFirst()+" ");
             }
-			System.out.println();
+            System.out.println();
 		}
 	}
 }
